@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include "RNTextSizeTurbomodule.h"
+#include "RNTextSizeTurboModule.h"
 #include "RNOH/ArkTSTurboModule.h"
 
 using namespace rnoh;
