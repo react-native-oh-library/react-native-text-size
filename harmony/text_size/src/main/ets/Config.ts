@@ -2,6 +2,8 @@ import measure, { MeasureOptions } from '@ohos.measure';
 import display from '@ohos.display';
 import { text } from "@kit.ArkGraphics2D";
 
+export const getDensity = () => display.getDefaultDisplaySync().densityPixels;
+
 export function config(measureText: MeasureOptions) {
   let textSize = measure.measureTextSize(measureText);
   return textSize;

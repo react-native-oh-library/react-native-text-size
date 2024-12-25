@@ -25,7 +25,7 @@
 import { TurboModule } from "@rnoh/react-native-openharmony/ts";
 import font from '@ohos.font'
 import measure, { MeasureOptions } from '@ohos.measure'
-import { config, measureTextParagraph } from './Config';
+import { config, measureTextParagraph, getDensity } from './Config';
 import display from '@ohos.display';
 
 export class RNTextSizeTurboModule extends TurboModule {
@@ -45,9 +45,10 @@ export class RNTextSizeTurboModule extends TurboModule {
         let height: number = textSize.height as number;
         let measureResult = measureTextParagraph(measureText, options.width);
 
+        const density = getDensity();
         let result: TSMeasureResult = {
-          width: width,
-          height: height,
+          width: width / density,
+          height: height / density,
           lineCount: measureResult.lines,
         }
         if (options.usePreciseWidth) {
@@ -61,6 +62,7 @@ export class RNTextSizeTurboModule extends TurboModule {
   };
 
   flatHeights(options: TSHeightsParams): Promise<number[]> {
+    const density = getDensity();
     return new Promise<number[]>((resolve, reject) => {
       try {
         const text = options.text;
@@ -75,7 +77,7 @@ export class RNTextSizeTurboModule extends TurboModule {
             letterSpacing: options.letterSpacing,
           }
           let textSize = config(measureText);
-          let height: number = textSize.height as number;
+          let height: number = textSize.height as number / density;
           prev.push(height);
           return prev;
         }, [])
